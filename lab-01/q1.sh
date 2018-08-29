@@ -3,8 +3,8 @@ freespace=$(df -h / | grep -E "\/$" | awk '{print $4}')
 greentext="\033[32m"
 bold="\033[1m"
 normal="\033[0m"
-logdate=$(date +"%Y%m%d")
-logfile="$logdate"_report.log
+logdate=$(date -I)
+logfile=_report_"$logdate".log
 
 echo -e $bold"Quick system report for "$greentext"$HOSTNAME"$normal
 printf "\tSystem type:\t%s\n" $MACHTYPE
