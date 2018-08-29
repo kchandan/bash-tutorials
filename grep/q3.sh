@@ -1,0 +1,1 @@
+wget -qO- www.yelp.com | grep yelp | wc -l
