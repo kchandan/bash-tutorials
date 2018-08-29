@@ -1,1 +1,1 @@
-find . -mmin +60 
+find /home/ec2-user -mmin +60 
