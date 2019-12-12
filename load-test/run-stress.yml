@@ -1,0 +1,21 @@
+- hosts: all  # Host or Group of Selections
+  become: true
+  vars:
+    ansible_ssh_user: ec2-user 
+    ansible_ssh_private_key_file: ~/linux-training.pem
+  tasks:
+  - name: Start Stress
+    command: stress -c 2 -i 1 -m 1 --vm-bytes 128M -t 100s
+    async: 45
+    poll: 0
+- hosts: admin
+  become: true
+  vars:
+    ansible_ssh_user: ec2-user 
+    ansible_ssh_private_key_file: ~/linux-training.pem
+  tasks:
+    - name: Start ab
+      command: ab -n 1000 -c 1000 "http://{{ item }}/"
+      async: 30
+      poll: 0
+      with_items: "{{ groups['all'] }}"
